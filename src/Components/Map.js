@@ -3,7 +3,8 @@ import {
 	MapContainer, TileLayer, Marker, Popup, useMapEvents,
 } from 'react-leaflet';
 import Path from './Path';
-import path1 from '../Data/Data';
+import { path1, stations } from '../Data/Data';
+import Stations from './Stations';
 
 function LocationMarker() {
 	const [position, setPosition] = useState(null);
@@ -26,6 +27,7 @@ function LocationMarker() {
 }
 
 function Map() {
+	const [passengers, setPassengers] = useState(stations.map(() => 0));
 	const center = {
 		lat: 48.78166783486849,
 		lng: 2.2153474224385263,
@@ -43,6 +45,7 @@ function Map() {
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
 			{/* <LocationMarker /> */}
+			<Stations stations={stations} passengers={passengers} />
 			<Path positions={[...path1]} />
 		</MapContainer>
 	);

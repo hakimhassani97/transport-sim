@@ -7,6 +7,7 @@ import IconBus from './IconBus';
 
 function Path({ positions }) {
 	const limeOptions = { color: 'lime' };
+	const each = 6000; // 6 seconds
 
 	const [busPosition, setBusPosition] = useState(0);
 
@@ -23,8 +24,7 @@ function Path({ positions }) {
 	};
 
 	useEffect(() => {
-		updatePosition();
-		const interval = setInterval(updatePosition, 5000);
+		const interval = setInterval(updatePosition, each);
 
 		return () => {
 			clearInterval(interval);
@@ -38,7 +38,7 @@ function Path({ positions }) {
 
 	return (
 		<>
-			<ReactLeafletDriftMarker position={positions[busPosition]} duration={5000} icon={IconBus} />
+			<ReactLeafletDriftMarker position={positions[busPosition]} duration={each} icon={IconBus} />
 			<Polyline pathOptions={limeOptions} positions={positions} />
 		</>
 	);
